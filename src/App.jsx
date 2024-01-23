@@ -5,6 +5,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer theme="colored" position='bottom-left'/>
     </>
   );
 }
