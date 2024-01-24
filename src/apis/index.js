@@ -8,3 +8,12 @@ export const signUpAPI = async (data) => {
   });
   return response.data;
 };
+
+export const signInAPI = async (data) => {
+  const response = await axiosIntansce({
+    url: '/auth/signin',
+    method: 'post',
+    data
+  });
+  return response.data;
+};

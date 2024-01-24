@@ -11,7 +11,7 @@ import {
     from 'react-icons/bs'
 const FooterApp = () => {
     return (
-        <Footer container className='border border-t-8 border-indigo-500/75'>
+        <Footer container className='border border-t-8 border-indigo-500/75 mt-[100px]'>
             <div className='w-full max-w-[1200px] mx-auto'>
                 <div className='flex flex-col sm:flex-row gap-4 sm:items-center justify-between  '>
                     <div className='mt-5'>
