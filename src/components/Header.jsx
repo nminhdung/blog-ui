@@ -23,8 +23,8 @@ const Header = () => {
         <CiSearch />
       </Button>
       <Navbar.Toggle />
- 
-      
+
+
       <Navbar.Collapse>
         <Navbar.Link active={path === '/'} as={'div'}>
           <Link to='/'>Home</Link>
@@ -38,7 +38,7 @@ const Header = () => {
           <Link to='/about'>About</Link>
         </Navbar.Link>
         <Navbar.Link className='flex gap-2 items-center md:hidden'>
-                    Mode:
+          Mode:
           <Button className='w-12 h-8  border-black' color='gray' pill>
             <FaMoon />
           </Button>

@@ -6,6 +6,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
 import { ToastContainer } from 'react-toastify';
+import FooterApp from './components/Footer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/sign-up' element={<Signup />} />
           <Route path='/dashboard' element={<Dashboard />} />
         </Routes>
+        <FooterApp/>
       </BrowserRouter>
       <ToastContainer theme="colored" position='bottom-left'/>
     </>
