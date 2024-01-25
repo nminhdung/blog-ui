@@ -6,30 +6,33 @@ import { signInAPI } from '../apis';
 import { HiInformationCircle } from 'react-icons/hi';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { signInPending, signInSuccess, signInFailed } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import Oauth from '../components/Oauth';
 
 const Signin = () => {
   const { register, handleSubmit, formState: { errors }, } = useForm();
-  const [errorMessages, setErrorMessages] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
-  const onSubmit = async(data) => {
-    console.log(data);
+  const { loading, error } = useSelector(state => state.user)
  
+  
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const onSubmit = async (data) => {
+    console.log(data);
+
     try {
-      setLoading(true);
-      setErrorMessages(null);
+      dispatch(signInPending());
+     
       const res = await signInAPI(data);
       if (!res.result === null) {
-        setErrorMessages('Can not sign in');
+        dispatch(signInFailed(res.message));
         return;
       }
-      setLoading(false);
-      setErrorMessages(null);
+      dispatch(signInSuccess(res.result));
       navigate('/')
       toast.success('Sign up successfully');
     } catch (error) {
-      setErrorMessages('Email or password invalid');
-      setLoading(false);
+      dispatch(signInFailed(error.message));
     }
   };
   return (
@@ -41,7 +44,7 @@ const Signin = () => {
       {/* right side */}
       <div className='flex-1 w-full'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
-          
+
           <div>
             <Label value='Your email' />
             <TextInput
@@ -63,7 +66,17 @@ const Signin = () => {
               type='password'
               placeholder='Passowrd'
               id='password'
-              {...register("password", { required: 'Password is required', minLength: 8, maxLength: 18 })}
+              {...register("password", {
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password at least 8 characters long'
+                },
+                maxLength: {
+                  value: 18,
+                  message: 'Password maximum 8 characters'
+                }
+              })}
             />
             {errors.password && <span className='text-sm text-red-500'>{errors.password?.message}</span>}
 
@@ -74,13 +87,14 @@ const Signin = () => {
               <span className='pl-3'>Loading</span>
             </> : 'Sign In'}
           </Button>
+          <Oauth />
         </form>
         <div className='flex gap-2 mt-5'>
           <span>Have an account?</span>
           <Link to='/sign-up' className='text-blue-500 hover:underline'>Sign Up</Link>
         </div>
-        {errorMessages && <Alert className='mt-5' color="failure" icon={HiInformationCircle}>
-          {errorMessages}
+        {error && <Alert className='mt-5' color="failure" icon={HiInformationCircle}>
+          {error}
         </Alert>}
       </div>
     </div>
