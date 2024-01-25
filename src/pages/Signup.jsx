@@ -2,7 +2,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import React, { useState } from 'react';
 import welcomeImg from '../assets/images/welcome.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signUpAPI } from '../apis';
 import { HiInformationCircle } from 'react-icons/hi';
 import { useForm } from 'react-hook-form';
@@ -13,10 +13,11 @@ const Signup = () => {
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const [errorMessages, setErrorMessages] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     console.log(data);
- 
+
     try {
       setLoading(true);
       setErrorMessages(null);
@@ -27,6 +28,7 @@ const Signup = () => {
       }
       setLoading(false);
       setErrorMessages(null);
+      navigate('/sign-in')
       toast.success('Sign up successfully');
     } catch (error) {
       setErrorMessages('Email existed or email invalid');
@@ -75,7 +77,17 @@ const Signup = () => {
               type='password'
               placeholder='Passowrd'
               id='password'
-              {...register("password", { required: 'Password is required', minLength: 8, maxLength: 18 })}
+              {...register("password", {
+                required: 'Password is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password at least 8 characters long'
+                },
+                maxLength: {
+                  value: 18,
+                  message: 'Password maximum 8 characters'
+                }
+              })}
             />
             {errors.password && <span className='text-sm text-red-500'>{errors.password?.message}</span>}
 

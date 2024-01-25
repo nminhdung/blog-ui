@@ -17,3 +17,11 @@ export const signInAPI = async (data) => {
   });
   return response.data;
 };
+export const signInGoogle = async (data) => {
+  const response = await axiosIntansce({
+    url: '/auth/google',
+    method: 'post',
+    data
+  });
+  return response.data;
+}
