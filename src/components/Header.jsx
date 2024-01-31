@@ -1,11 +1,16 @@
-import { Navbar, TextInput, Button } from 'flowbite-react';
+import { Navbar, TextInput, Button, Dropdown, Avatar, DropdownItem, DropdownDivider } from 'flowbite-react';
 import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from 'react-router-dom';
 import { FaMoon } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux';
+
 import React from 'react';
+import { toggleTheme } from '../redux/theme/themeSlice';
 
 const Header = () => {
   const path = useLocation().pathname;
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.user);
   return (
     <Navbar className='border-b-2 '>
       <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl
@@ -30,16 +35,13 @@ const Header = () => {
           <Link to='/'>Home</Link>
         </Navbar.Link>
 
-        <Navbar.Link active={path === '/sign-in'} as={'div'}>
-          <Link to='/sign-in'>Sign in</Link>
-        </Navbar.Link>
-
         <Navbar.Link active={path === '/about'} as={'div'}>
           <Link to='/about'>About</Link>
         </Navbar.Link>
         <Navbar.Link className='flex gap-2 items-center md:hidden'>
           Mode:
-          <Button className='w-12 h-8  border-black' color='gray' pill>
+          <Button className='w-12 h-8  border-black' color='gray' pill
+            onClick={() => { console.log('123'); dispatch(toggleTheme()) }}>
             <FaMoon />
           </Button>
         </Navbar.Link>
@@ -47,14 +49,42 @@ const Header = () => {
 
 
       <div className='md:flex gap-2 items-center  hidden '>
-        <Button className='w-12 h-8 hidden md:inline border-black' color='gray' pill>
+        <Button className='w-12 h-8 hidden md:inline border-black' color='gray' pill
+          onClick={() => { console.log('123'); dispatch(toggleTheme()) }}
+        >
           <FaMoon />
         </Button>
-        <Link to='/sign-in'>
-          <Button className='hidden md:inline'
-            gradientDuoTone="purpleToPink"
-          >Sign In</Button>
-        </Link>
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar
+                alt='user'
+                img={currentUser?.avatar}
+                rounded
+
+              />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">{currentUser?.username}</span>
+              <span className="block truncate text-sm font-medium">{currentUser?.email}</span>
+            </Dropdown.Header>
+            <Link to={`/dashboard?tab=profile`}>
+              <DropdownItem>Profile</DropdownItem>
+            </Link>
+            <DropdownDivider />
+            <DropdownItem>Sign out</DropdownItem>
+          </Dropdown>
+        ) : (
+          <Link to='/sign-in'>
+            <Button className='hidden md:inline'
+              gradientDuoTone="purpleToPink"
+            >Sign In</Button>
+          </Link>
+        )}
+
       </div>
     </Navbar>
   );

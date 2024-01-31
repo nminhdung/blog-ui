@@ -19,7 +19,6 @@ module.exports = {
    
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
-    "indent": ["error", 2],
     "semi": [1, 'always']
   },
 }
