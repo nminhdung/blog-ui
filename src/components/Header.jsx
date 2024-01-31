@@ -1,7 +1,7 @@
 import { Navbar, TextInput, Button, Dropdown, Avatar, DropdownItem, DropdownDivider } from 'flowbite-react';
 import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from 'react-router-dom';
-import { FaMoon } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
 
 import React from 'react';
@@ -11,6 +11,7 @@ const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector(state => state.user);
+  const { theme } = useSelector(state => state.theme);
   return (
     <Navbar className='border-b-2 '>
       <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl
@@ -40,19 +41,19 @@ const Header = () => {
         </Navbar.Link>
         <Navbar.Link className='flex gap-2 items-center md:hidden'>
           Mode:
-          <Button className='w-12 h-8  border-black' color='gray' pill
-            onClick={() => { console.log('123'); dispatch(toggleTheme()) }}>
-            <FaMoon />
+          <Button className='w-12 h-8  border-black' olor={`${theme === 'light' ? 'gray' : 'warning'}`} pill
+            onClick={() => dispatch(toggleTheme())}>
+            {theme === 'light' ? <FaMoon  /> : <FaSun />}
           </Button>
         </Navbar.Link>
       </Navbar.Collapse>
 
 
       <div className='md:flex gap-2 items-center  hidden '>
-        <Button className='w-12 h-8 hidden md:inline border-black' color='gray' pill
-          onClick={() => { console.log('123'); dispatch(toggleTheme()) }}
+        <Button className='w-12 h-8 hidden md:inline border-black' color={`${theme === 'light' ? 'gray' : 'warning'}`} pill
+          onClick={() => dispatch(toggleTheme())}
         >
-          <FaMoon />
+          {theme === 'light' ? <FaMoon /> : <FaSun />}
         </Button>
         {currentUser ? (
           <Dropdown
