@@ -12,9 +12,9 @@ import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Header />
+
+    <BrowserRouter>
+      <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
@@ -25,10 +25,11 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
           </Route>
         </Routes>
-        <FooterApp />
-      </BrowserRouter>
+      <FooterApp />
       <ToastContainer theme="colored" position='bottom-left' />
-    </>
+    </BrowserRouter>
+
+
   );
 }
 
