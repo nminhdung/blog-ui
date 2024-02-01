@@ -25,3 +25,18 @@ export const signInGoogle = async (data) => {
   });
   return response.data;
 }
+export const updateProfileAPI = async (data, userId) => {
+  const response = await axiosIntansce({
+    url: `/user/update/${userId}`,
+    method: 'put',
+    data
+  })
+  return response.data;
+}
+export const signOutAPI = async () => {
+  const response = await axiosIntansce({
+    url: `/auth/signout`,
+    methor:'get'
+  })
+  return response.data;
+}

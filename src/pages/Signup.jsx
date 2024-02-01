@@ -16,7 +16,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
+
 
     try {
       setLoading(true);
@@ -51,7 +51,6 @@ const Signup = () => {
               placeholder='Username'
               id='username'
               {...register("username", { required: 'Username is required' })}
-
             />
             {errors.username && <span className='text-sm text-red-500'>{errors.username?.message}</span>}
 
