@@ -17,7 +17,7 @@ const DashSidebar = ({ tab }) => {
             toast.error(error)
         }
 
-    }
+    };
     return (
         <Sidebar className='w-full md:w-56'>
             <Sidebar.Items>

@@ -3,15 +3,27 @@ import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from 'react-router-dom';
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useSelector, useDispatch } from 'react-redux';
-
+import { signOutAPI } from "../apis";
 import React from 'react';
 import { toggleTheme } from '../redux/theme/themeSlice';
+import { signOut } from '../redux/user/userSlice';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const path = useLocation().pathname;
   const dispatch = useDispatch();
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector(state => state.theme);
+  const handleSignOut = async () => {
+      try {
+          const res = await signOutAPI();
+          toast.success('You are logged out');
+          dispatch(signOut());
+      } catch (error) {
+          toast.error(error)
+      }
+
+  };
   return (
     <Navbar className='border-b-2 '>
       <Link to='/' className='self-center whitespace-nowrap text-sm sm:text-xl
@@ -43,7 +55,7 @@ const Header = () => {
           Mode:
           <Button className='w-12 h-8  border-black' olor={`${theme === 'light' ? 'gray' : 'warning'}`} pill
             onClick={() => dispatch(toggleTheme())}>
-            {theme === 'light' ? <FaMoon  /> : <FaSun />}
+            {theme === 'light' ? <FaMoon /> : <FaSun />}
           </Button>
         </Navbar.Link>
       </Navbar.Collapse>
@@ -76,7 +88,7 @@ const Header = () => {
               <DropdownItem>Profile</DropdownItem>
             </Link>
             <DropdownDivider />
-            <DropdownItem>Sign out</DropdownItem>
+            <DropdownItem onClick={handleSignOut}>Sign out</DropdownItem>
           </Dropdown>
         ) : (
           <Link to='/sign-in'>
