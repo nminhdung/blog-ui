@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { updateFailed, updateSuccess, updateUserPending } from '../redux/user/userSlice';
 import { updateProfileAPI } from '../apis';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 
 const DashProfile = () => {
@@ -128,6 +129,9 @@ const DashProfile = () => {
                 {errors.password && <span className='text-sm text-red-500'>{errors.password?.message}</span>}
 
                 <Button type='submit' gradientDuoTone='purpleToBlue' outline>Update</Button>
+                {currentUser.isAdmin && <Link to={'/create-post'}>
+                    <Button gradientDuoTone='purpleToPink' type='button' className='w-full'>Create post</Button>
+                </Link>}
             </form>
         </div>
     )
