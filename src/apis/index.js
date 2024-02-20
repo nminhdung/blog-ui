@@ -36,7 +36,15 @@ export const updateProfileAPI = async (data, userId) => {
 export const signOutAPI = async () => {
   const response = await axiosIntansce({
     url: `/auth/signout`,
-    methor:'get'
+    methor: 'get'
+  })
+  return response.data;
+}
+export const createPostAPI = async (data) => {
+  const response = await axiosIntansce({
+    url: '/post/create-post',
+    method: 'post',
+    data
   })
   return response.data;
 }
