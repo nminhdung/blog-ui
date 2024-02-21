@@ -48,3 +48,10 @@ export const createPostAPI = async (data) => {
   })
   return response.data;
 }
+export const getPostsAPI = async (params) => {
+  const response = await axiosIntansce({
+    url: `/post/getposts?${params}`,
+    method: 'get',
+  })
+  return response.data;
+}
