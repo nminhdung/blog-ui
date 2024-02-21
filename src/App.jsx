@@ -11,7 +11,6 @@ import AdminPrivateRoute from './pages/AdminPrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import CreatePost from './pages/CreatePost';
 
-
 function App() {
   return (
 

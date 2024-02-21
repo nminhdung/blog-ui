@@ -55,3 +55,10 @@ export const getPostsAPI = async (params) => {
   })
   return response.data;
 }
+export const deletePostAPI = async (postId) => {
+  const response = await axiosIntansce({
+    url: `/post/delete/${postId}`,
+    method: 'delete',
+  })
+  return response.data;
+}
