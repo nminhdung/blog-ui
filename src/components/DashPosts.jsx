@@ -40,11 +40,12 @@ const DashPosts = () => {
     }
     useEffect(() => {
         fetchPosts();
-    }, [render])
+    }, [reFetch])
     return (
-        <div className='table-auto md:mx-auto overflow-x-scroll mt-3'>
+        <div className='table-auto md:mx-auto overflow-x-scroll mt-3 
+        scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
             {currentUser.isAdmin && posts.length > 0 ? (
-                <Table hoverable>   
+                <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>Date Updated</Table.HeadCell>
                         <Table.HeadCell>Post image</Table.HeadCell>
@@ -74,7 +75,12 @@ const DashPosts = () => {
                                     {post.category}
                                 </Table.Cell>
                                 <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                                    <span className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 cursor-pointer">Edit</span>
+                                    <Link to={`/update-post/${post._id}`}>
+                                        <span className="font-medium text-cyan-600 hover:underline dark:text-cyan-500 cursor-pointer"
+                                        >
+                                            Edit
+                                        </span>
+                                    </Link>
                                 </Table.Cell>
                                 <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                                     <span className="font-medium text-red-500 hover:underline dark:text-red-600 cursor-pointer"

@@ -10,6 +10,7 @@ import PrivateRoute from './pages/PrivateRoute';
 import AdminPrivateRoute from './pages/AdminPrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route element={<AdminPrivateRoute />}>
             <Route path='/create-post' element={<CreatePost />} />
+            <Route path='/update-post/:postId' element={<UpdatePost />} />
           </Route>
         </Routes>
       <FooterApp />
