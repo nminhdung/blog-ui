@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { createPostAPI } from '../apis';
 import { toast } from 'react-toastify';
+import { moduleEditor } from '../utils/formatters';
 
 const CreatePost = () => {
     const {
@@ -141,6 +142,7 @@ const CreatePost = () => {
                     value={editorContent}
                     onChange={onEditorStateChange}
                     className='h-[500px] mb-12'
+                    modules={moduleEditor}
                 />
                 {errors.postContent && <span className='text-sm text-red-500'>{errors.postContent?.message}</span>}
                 <Button type='submit' gradientDuoTone='purpleToBlue' >Publish</Button>
