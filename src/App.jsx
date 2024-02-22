@@ -11,26 +11,29 @@ import AdminPrivateRoute from './pages/AdminPrivateRoute';
 import { ToastContainer } from 'react-toastify';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
+import PostDetails from './pages/PostDetails';
 
 function App() {
   return (
 
     <BrowserRouter>
       <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/sign-in' element={<Signin />} />
-          <Route path='/sign-up' element={<Signup />} />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/sign-in' element={<Signin />} />
+        <Route path='/sign-up' element={<Signup />} />
 
-          <Route element={<PrivateRoute />}>
-            <Route path='/dashboard' element={<Dashboard />} />
-          </Route>
-          <Route element={<AdminPrivateRoute />}>
-            <Route path='/create-post' element={<CreatePost />} />
-            <Route path='/update-post/:postId' element={<UpdatePost />} />
-          </Route>
-        </Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
+        <Route element={<AdminPrivateRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
+        </Route>
+        <Route path='/post/:pid' element={<PostDetails />} />
+
+      </Routes>
       <FooterApp />
       <ToastContainer theme="colored" position='bottom-left' />
     </BrowserRouter>

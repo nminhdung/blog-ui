@@ -22,7 +22,7 @@ const Dashboard = () => {
       <div>
         <DashSidebar tab={tab} />
       </div>
-     <div className=''>
+     <div className='flex-1 p-4'>
         {tab === 'profile' && <DashProfile />}
         {tab === 'posts' && <DashPosts />}
         {tab === 'users' && <DashUsers />}

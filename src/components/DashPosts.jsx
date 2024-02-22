@@ -62,12 +62,12 @@ const DashPosts = () => {
                                     {new Date(post.updatedAt).toLocaleString()}
                                 </Table.Cell>
                                 <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                                    <Link to={`/post/slug/${post.slug}`}>
+                                    <Link to={`/post/${post._id}`}>
                                         <img src={post.image} alt={post.title} className='w-20 h-10 object-cover' />
                                     </Link>
                                 </Table.Cell>
                                 <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                                    <Link to={`/post/slug/${post.slug}`}>
+                                    <Link to={`/post/${post._id}`}>
                                         {post.title}
                                     </Link>
                                 </Table.Cell>

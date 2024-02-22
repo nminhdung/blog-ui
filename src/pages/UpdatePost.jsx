@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import { getPostAPI, updatePostAPI } from '../apis';
 import { toast } from 'react-toastify';
 import { useParams, useNavigate } from 'react-router-dom';
+import { moduleEditor } from '../utils/formatters';
 
 const UpdatePost = () => {
     const {
@@ -25,6 +26,7 @@ const UpdatePost = () => {
     const [showImageUploaded, setShowImageUploaded] = useState(false);
 
     const [postData, setPostData] = useState(null);
+    console.log('🚀 ~ UpdatePost ~ postData:', postData)
 
     const [file, setFile] = useState(null);
 
@@ -33,6 +35,8 @@ const UpdatePost = () => {
     const [fileUploadError, setFileUploadError] = useState(null);
 
     const navigate = useNavigate()
+
+    
 
     const handleImageChange = (e) => {
         const imageFile = e.target.files[0];
@@ -44,7 +48,7 @@ const UpdatePost = () => {
 
     const handleImageUpload = async () => {
         try {
-           
+
             if (!file) {
                 setFileUploadError("Please choose your image");
                 return;
@@ -102,7 +106,8 @@ const UpdatePost = () => {
     useEffect(() => {
         const fetchPost = async () => {
             const res = await getPostAPI(postId);
-            setPostData(res.rs);
+            setPostData(res.result);
+
         }
         fetchPost();
     }, [postId]);
@@ -163,6 +168,7 @@ const UpdatePost = () => {
                 <ReactQuill
                     theme="snow"
                     placeholder="Write something ...."
+                    modules={moduleEditor}
                     value={editorContent}
                     onChange={onEditorStateChange}
                     className='h-[500px] mb-12'
