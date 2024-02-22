@@ -77,3 +77,18 @@ export const updatePostAPI = async(postId,data)=>{
   })
   return response.data;
 }
+
+export const getUsersAPI = async (params) => {
+  const response = await axiosIntansce({
+    url: `/user/getusers?${params}`,
+    method: 'get',
+  })
+  return response.data;
+}
+export const deleteUserAPI = async (userId) => {
+  const response = await axiosIntansce({
+    url: `/user/delete/${userId}`,
+    method: 'delete',
+  })
+  return response.data;
+}
