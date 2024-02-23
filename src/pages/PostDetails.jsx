@@ -3,13 +3,18 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getPostAPI } from '../apis';
+import CommentSection from '../components/CommentSection';
 
 const PostDetails = () => {
     const [post, setPost] = useState();
-    console.log('🚀 ~ PostDetails ~ post:', post)
     const [loading, setLoading] = useState(false);
     const [err, setError] = useState('');
+    const [refetch, setRefetch] = useState(false);
     const { pid } = useParams();
+
+    const reRender = () => {
+        setRefetch(!refetch);
+    }
     const fetchPost = async () => {
         setLoading(true);
         const res = await getPostAPI(pid);
@@ -23,7 +28,7 @@ const PostDetails = () => {
     }
     useEffect(() => {
         fetchPost();
-    }, [pid])
+    }, [pid, refetch])
     if (loading) {
         return <div className='flex justify-center items-center min-h-screen'>
             <Spinner size='xl' />
@@ -47,8 +52,9 @@ const PostDetails = () => {
                 <span>{post && (post?.content.length / 1000).toFixed(0)} mins read</span>
             </div>
             <div className='p-3 max-w-2xl mx-auto w-full' dangerouslySetInnerHTML={{ __html: post && post.content }}></div>
+            <CommentSection postId={post?._id} comments={post?.comments} render={reRender} />
         </div>
-        
+
     );
 };
 

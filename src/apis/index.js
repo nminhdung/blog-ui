@@ -69,7 +69,7 @@ export const getPostAPI = async (postId) => {
   })
   return response.data;
 }
-export const updatePostAPI = async(postId,data)=>{
+export const updatePostAPI = async (postId, data) => {
   const response = await axiosIntansce({
     url: `/post/update/${postId}`,
     method: 'put',
@@ -77,7 +77,14 @@ export const updatePostAPI = async(postId,data)=>{
   })
   return response.data;
 }
-
+export const commentPostAPI = async (postId, data) => {
+  const response = await axiosIntansce({
+    url: `/post/comment/${postId}`,
+    method:'post',
+    data
+  })
+  return response.data;
+}
 export const getUsersAPI = async (params) => {
   const response = await axiosIntansce({
     url: `/user/getusers?${params}`,
