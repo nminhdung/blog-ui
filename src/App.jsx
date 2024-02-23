@@ -12,11 +12,13 @@ import { ToastContainer } from 'react-toastify';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
 import PostDetails from './pages/PostDetails';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
 
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
