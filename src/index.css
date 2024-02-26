@@ -46,9 +46,11 @@ body {
     padding: 10px;
     margin: 20px 0;
     border-radius: 4px;
+    color: white;
 }
 
-code>strong {
-    padding: 10px;
+p>code {
+    padding: 2px;
     border-radius: 4px;
+    color: white;
 }

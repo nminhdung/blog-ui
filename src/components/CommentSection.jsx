@@ -73,7 +73,13 @@ const CommentSection = ({ postId, comments, render }) => {
                     </p>
                     <div className='mt-7'>
                         {comments && comments.map((comment) => {
-                            return <Comment comment={comment} key={comment._id} />
+                            return <Comment
+                                comment={comment}
+                                key={comment._id}
+                                postId={postId}
+                                render={render}
+
+                            />
                         })}
                     </div>
                 </div>

@@ -80,7 +80,23 @@ export const updatePostAPI = async (postId, data) => {
 export const commentPostAPI = async (postId, data) => {
   const response = await axiosIntansce({
     url: `/post/comment/${postId}`,
-    method:'post',
+    method: 'post',
+    data
+  })
+  return response.data;
+}
+export const deleteCommentPostAPI = async (postId, data) => {
+  const response = await axiosIntansce({
+    url: `/post/delete-comment/${postId}`,
+    method: 'delete',
+    data
+  })
+  return response.data;
+}
+export const editCommentPostAPI = async (postId, data) => {
+  const response = await axiosIntansce({
+    url: `/post/edit-comment/${postId}`,
+    method: 'put',
     data
   })
   return response.data;
