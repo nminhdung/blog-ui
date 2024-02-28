@@ -16,7 +16,7 @@ body {
 }
 
 .post-content h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem ;
     font-weight: 600;
     font-family: sans-serif;
     margin: 1.5rem 0;
@@ -37,9 +37,9 @@ body {
     text-decoration: underline;
 }
 
-.dark .post-content a {
-    color: red;
-}
+/* .dark .post-content a {
+   
+} */
 
 .ql-syntax {
     background-color: #1e293b;

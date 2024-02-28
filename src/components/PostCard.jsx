@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PostCard = ({ post }) => {
     return (
-        <div className=' shadow-md  overflow-hidden flex flex-col border rounded-md'>
+        <div className=' shadow-xl dark:shadow-md-light rounded-md overflow-hidden flex flex-col '>
             <Link to={`/post/${post?._id}`}>
                 <img
                     src={post?.image} alt={post?.title}
@@ -13,6 +13,7 @@ const PostCard = ({ post }) => {
             <div className='flex flex-col gap-2 p-3 flex-1'>
                 <p className='text-xl font-semibold line-clamp-2'>{post?.title}</p>
                 <span className='italic text-sm'>{post?.category}</span>
+                <p className='line-clamp-3' dangerouslySetInnerHTML={{ __html: post && post?.content?.slice(0,200) }}></p>
                 <Link to={`/post/${post?._id}`} className='border border-teal-500 
                 py-2 w-full rounded-md hover:bg-teal-500 hover:border-white
                  hover:text-white transition-all duration-300 text-center mt-auto'>
