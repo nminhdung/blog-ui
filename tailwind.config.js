@@ -7,7 +7,22 @@ export default {
     'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      dropShadow: {
+        '3xl-yellow': '0 35px 35px rgba(255, 255, 53, 0.6)'
+      },
+      keyframes: {
+        moveY: {
+          'to': { transform: 'translateY(20px)' }
+        }
+      },
+      boxShadow: {
+        'md-light':'0 2px 6px -1px rgba(255, 255, 223, 1)'
+      },
+      animation: {
+        'move-top-down': 'moveY 2s infinite ease alternate'
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
