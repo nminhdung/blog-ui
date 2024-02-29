@@ -1,8 +1,9 @@
-import { Button, Select, Spinner, TextInput } from 'flowbite-react';
+import { Button, Pagination, Select, Spinner, TextInput } from 'flowbite-react';
 import React, { useEffect, useState } from 'react';
 import { set } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getPostsAPI } from '../apis';
+import Paginate from '../components/Paginate';
 import PostCard from '../components/PostCard';
 
 const Search = () => {
@@ -10,16 +11,21 @@ const Search = () => {
         searchTerm: '',
         sort: 'desc',
         category: 'uncategorized'
-    })
+    });
+    const [currentPage, setCurrentPage] = useState(1);
+
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
-    // console.log('🚀 ~ Search ~ posts:', posts)
-    console.log('🚀 ~ SidebarData ~ data:', sidebarData)
     const [loading, setLoading] = useState(false);
+    const [counts, setCounts] = useState(1);
     const location = useLocation();
+    const totalPages = Math.ceil(counts / 2) || 1;
 
     const handleChange = (e) => {
         setSidebarData({ ...sidebarData, [e.target.id]: e.target.value })
+    }
+    const onPageChange = (page) => {
+        setCurrentPage(page);
     }
     const fetchPosts = async (searchQuery) => {
         setLoading(true);
@@ -28,6 +34,7 @@ const Search = () => {
             if (res.success) {
                 setPosts(res.result);
                 setLoading(false);
+                setCounts(res.counts);
             }
         } catch (error) {
             console.log(error);
@@ -39,6 +46,7 @@ const Search = () => {
         urlParams.set('searchTerm', sidebarData.searchTerm);
         urlParams.set('sort', sidebarData.sort);
         urlParams.set('category', sidebarData.category);
+        urlParams.set('page', currentPage)
         const searchQuery = urlParams.toString();
         navigate(`/search?${searchQuery}`)
     }
@@ -48,6 +56,7 @@ const Search = () => {
         const searchTermURL = urlParams.get('searchTerm');
         const sortURL = urlParams.get('sort');
         const categoryURL = urlParams.get('category');
+        const page = urlParams.get('page');
 
         if (searchTermURL || sortURL || categoryURL) {
             setSidebarData({
@@ -57,9 +66,18 @@ const Search = () => {
                 category: categoryURL
             })
         }
+        console.log(123)
         const searchQuery = urlParams.toString();
         fetchPosts(searchQuery);
     }, [location.search])
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        urlParams.set('searchTerm', sidebarData.searchTerm);
+        urlParams.set('sort', sidebarData.sort);
+        urlParams.set('page', currentPage);
+        const searchQuery = urlParams.toString();
+        navigate(`/search?${searchQuery}`)
+    }, [currentPage])
     return (
         <div className='flex md:flex-row mb-[100px]'>
             <div className='p-7 border-b md:border-r md:min-h-screen border-gray-500'>
@@ -105,20 +123,26 @@ const Search = () => {
                         Post results
                     </h1>
                 </div>
+                {
+                    loading && <div className='flex justify-center items-center min-h-screen'>
+                        <Spinner size='xl' />
+                    </div>
+                }
                 <div className='mt-7 p-7 grid md:grid-cols-3 gap-4'>
                     {!loading && posts.length === 0 && <h1>No post founed</h1>}
-                    {
-                        loading && <div className='flex justify-center items-center min-h-screen'>
-                            <Spinner size='xl' />
-                        </div>
-                    }
+
                     {
                         !loading && posts && posts.length > 0 && posts.map(post => {
                             return <PostCard key={post._id} post={post} />
                         })
                     }
                 </div>
+                {counts > 2 && <div className="flex overflow-x-auto sm:justify-center">
+                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={onPageChange} />
+                </div>}
+
             </div>
+
         </div>
     );
 };

@@ -102,7 +102,6 @@ const CreatePost = () => {
 
     const onEditorStateChange = (editorState) => {
         setValue("postContent", editorState);
-   
     };
 
     const editorContent = watch('postContent');

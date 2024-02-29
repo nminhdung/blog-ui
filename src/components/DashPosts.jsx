@@ -11,7 +11,7 @@ const DashPosts = () => {
     const { currentUser } = useSelector(state => state.user)
     const [reFetch, setRefetch] = useState(false)
     const fetchPosts = async () => {
-        const res = await getPostsAPI(`userId=${currentUser._id}`)
+        const res = await getPostsAPI(`userId=${currentUser._id}&limit=9`)
         if (res.success) {
             setPosts(res.result)
         }

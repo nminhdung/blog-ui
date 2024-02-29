@@ -32,6 +32,7 @@ const Header = () => {
     e.preventDefault();
     const urlParams = new URLSearchParams(location.search);
     urlParams.set('searchTerm', searchTerm);
+    
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`)
   }
