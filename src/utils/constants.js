@@ -1,4 +1,5 @@
 let apiRoot = '';
+console.log(process.env)
 if (process.env.BUILD_MODE === 'dev') {
     apiRoot = 'http://localhost:3000'
 }
