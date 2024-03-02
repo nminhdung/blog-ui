@@ -22,7 +22,7 @@ const DashboardComp = () => {
     }
     const fetchUsers = async () => {
         try {
-            const res = await getUsersAPI();
+            const res = await getUsersAPI('limit=9');
             if (res.success) {
                 setUsers(res.result);
             }

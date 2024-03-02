@@ -11,7 +11,7 @@ const DashUsers = () => {
     const { currentUser } = useSelector(state => state.user)
     const [reFetch, setRefetch] = useState(false)
     const fetchUsers = async () => {
-        const res = await getUsersAPI();
+        const res = await getUsersAPI('limit=9');
         if (res.success) {
             setUsers(res.result)
         }
