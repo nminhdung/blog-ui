@@ -13,8 +13,8 @@ import Oauth from '../components/Oauth';
 const Signin = () => {
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const { loading, error } = useSelector(state => state.user)
- 
-  
+
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onSubmit = async (data) => {
@@ -22,13 +22,16 @@ const Signin = () => {
 
     try {
       dispatch(signInPending());
-     
+
       const res = await signInAPI(data);
       if (!res.result === null) {
         dispatch(signInFailed(res.message));
         return;
       }
-      dispatch(signInSuccess(res.result));
+      dispatch(signInSuccess({
+        userData: res.result,
+        token: res.accessToken
+      }));
       navigate('/')
       toast.success('Sign up successfully');
     } catch (error) {

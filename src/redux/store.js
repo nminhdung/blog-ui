@@ -11,7 +11,7 @@ const persistConfig = {
 }
 const userConfig = {
   ...persistConfig,
-  whiteList: ['currentUser']
+  whiteList: ['currentUser','token']
 };
 
 
