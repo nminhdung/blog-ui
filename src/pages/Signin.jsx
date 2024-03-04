@@ -46,6 +46,10 @@ const Signin = () => {
       </div>
       {/* right side */}
       <div className='flex-1 w-full'>
+        <div className='flex flex-col gap-1 mb-10 text-center'>
+          <p className='font-bold'>Admin account : <span className='font-medium'>admin@gmail.com</span></p>
+          <p className='font-bold'>Admin password :<span className='font-medium'>123123123</span> </p>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
 
           <div>
